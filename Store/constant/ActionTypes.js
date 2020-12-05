@@ -10,3 +10,4 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 
 export const ADD_APPOINTMENTS = 'ADD_APPOINTMENTS';
 
+export const GET_ALL_RECIPIENT = 'GET_ALL_RECIPIENT';

@@ -17,13 +17,13 @@ const Home = ({ navigation }) => {
                 title="Go to About"
                 onPress={
                     () => {
-                        navigation.openDrawer()
+                        // navigation.openDrawer()
 
-                        // navigation.navigate('About',
-                        //     {
-                        //         userName: userName,
-                        //         rollNumber: 2643
-                        //     })
+                        navigation.navigate('About',
+                            {
+                                userName: userName,
+                                rollNumber: 2643
+                            })
                     }}
             />
 

@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, TextInput, Button } from 'react-native';
+import { signin } from '../Store/action/auth';
 import { useSelector, useDispatch } from 'react-redux';
-import { signupUser } from '../Store/action/auth';
-import 'react-native-gesture-handler';
 
-const Signup = ({ navigation }) => {
+const Signin = ({ navigation, route }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const { navigate } = navigation;
     return (
         <View style={{ flex: 1 }}>
 
@@ -25,15 +22,9 @@ const Signup = ({ navigation }) => {
             <Button
                 onPress={() => {
                     console.log(email, password)
-                    dispatch(signupUser({ email, password }));
+                    dispatch(signin({ email, password }));
                 }}
-                title="Register Here"
-                color="#841584"
-            />
-            <Button onPress={() => {
-                navigation.navigate('Signin')
-            }}
-                title='Already have an account? login here.'
+                title="Login"
                 color="#841584"
             />
 
@@ -41,4 +32,4 @@ const Signup = ({ navigation }) => {
     )
 }
 
-export default Signup;
+export default Signin;

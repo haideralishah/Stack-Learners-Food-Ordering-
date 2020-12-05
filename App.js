@@ -1,23 +1,26 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 
 import Home from './components/home';
+import Inbox from './components/inbox';
+
 import Camera from './components/camera';
 import Signup from './components/signup';
 import Contact from './components/contact';
 import About from './components/about';
+import Signin from './components/signin';
 import store from './Store/index';
 import StylingPage from './components/stylingpage';
 import * as firebase from 'firebase';
-
+import { fetchUserInfo } from './Store/action/auth';
 const firebaseConfig = {
   apiKey: "AIzaSyDMMCPYd6DIsl_YRBPfXrgExlhpd6avqZM",
   authDomain: "testing-2b480.firebaseapp.com",
@@ -35,31 +38,43 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
-// const { Navigator, Screen } = Stack;
+// const Tab = createBottomTabNavigator();
+// const Drawer = createDrawerNavigator();
+const { Navigator, Screen } = Stack;
 
-export default function App() {
-  return (
+// export default function App() {
 
-    <Provider store={store}>
 
-      <NavigationContainer>
-        <Drawer.Navigator>
+//   useEffect(() => {
+//     firebase.auth().onAuthStateChanged((auth) => {
+//       if (auth) {
+//         console.log(auth, 'on auth state change ');
+//       }
+//     })
+//   }, []);
+//   return (
 
-          <Drawer.Screen name='Contact' component={Contact} />
-          <Drawer.Screen name='Camera' component={Camera} />
+//     <Provider store={store}>
 
-          {/* <Drawer.Screen name='Signup' component={Signup} />
+//       <NavigationContainer>
+//         <Drawer.Navigator>
+//           <Drawer.Screen name='Signup' component={Signup} />
+//           <Drawer.Screen name='Signin' component={Signin} />
 
-          <Drawer.Screen name='Home' component={Home} />
-          <Drawer.Screen name='About' component={About} />
-          <Drawer.Screen name='StylingPage' component={StylingPage} /> */}
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </Provider>
-  );
-}
+
+//           {/* <Drawer.Screen name='Contact' component={Contact} />
+//           <Drawer.Screen name='Camera' component={Camera} /> 
+
+
+
+//            <Drawer.Screen name='Home' component={Home} />
+//           <Drawer.Screen name='About' component={About} />
+//           <Drawer.Screen name='StylingPage' component={StylingPage} /> */}
+//         </Drawer.Navigator>
+//       </NavigationContainer>
+//     </Provider>
+//   );
+// }
 
 
 
@@ -147,34 +162,47 @@ export default function App() {
 
 
 
+function AppContainer() {
+  const authenticatedUser = useSelector(({ auth }) => auth.user);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((auth) => {
+      if (auth) {
+        console.log(auth, 'on auth state change ');
+        console.log(authenticatedUser, 'authenticatedUser')
+        fetchUserInfo(auth.uid);
+      }
+    })
+  }, []);
+
+
+  return (
+    <NavigationContainer>
+      {
+        (authenticatedUser) ?
+          < Navigator >
+            <Screen name='Inbox' component={Inbox} />
+          </Navigator>
+          :
+          < Navigator >
+            <Screen name='Signup' component={Signup} />
+            <Screen name='Signin' component={Signin} />
+          </Navigator>
+      }
+    </NavigationContainer >
+  )
+}
 
 
 
 
-
-// export default function App() {
-//   return (
-//     <NavigationContainer>
-//       <Navigator>
-//         <Screen name="Home" component={Home} />
-//         <Screen
-//           name="About"
-//           component={About}
-//           options={{
-//             title: 'About Us',
-//             headerStyle: {
-//               backgroundColor: '#f4511e',
-//             },
-//             headerTintColor: '#fff',
-//             headerTitleStyle: {
-//               fontWeight: 'bold',
-//             },
-//           }}
-//         />
-//       </Navigator>
-//     </NavigationContainer>
-//   );
-// }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  );
+}
 
 
 

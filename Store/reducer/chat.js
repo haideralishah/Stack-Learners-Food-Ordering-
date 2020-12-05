@@ -1,19 +1,23 @@
-import { CHATS_FETCHED } from "../constant/ActionTypes";
+import { GET_ALL_RECIPIENT } from "../constant/ActionTypes";
 
 
 const INIT_STATE = {
-    chats: []
+    chats: [],
+    recipients: []
 };
 
 
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
-        case CHATS_FETCHED: {
+        case GET_ALL_RECIPIENT: {
+            let allRecepients = state.recipients.slice(0);
+            allRecepients.push(action.payload);
             return {
                 ...state,
-                chats: action.payload
+                recipients: allRecepients
             }
         }
+
         default:
             return state;
     }
