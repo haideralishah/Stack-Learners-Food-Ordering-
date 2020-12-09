@@ -1,5 +1,6 @@
 import { CHANGE_AUTH, CHANGE_ROLLNUMBER, CHANGE_USERNAME, TOGGLE_BULB, USER_REGISTERED, USER_LOGOUT } from '../constant/ActionTypes';
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 // export function signupUser(user) {
 //     return dispatch => {
@@ -64,8 +65,17 @@ export function signin(user) {
 
 
 
+// let user2Uid = '32UTvjICmZhxw5GyLR2FQjS6v682';
+// let user1Uid = 'MgGfxAQOtTbvhehWuWhHPgyWgFR2';
 
+// let chatDocId;
 
+// if (user1Uid > user2Uid) {
+//     chatDocId = user1Uid + user2Uid;
+// }
+// else {
+//     chatDocId = user2Uid + user1Uid;
+// }
 
 
 

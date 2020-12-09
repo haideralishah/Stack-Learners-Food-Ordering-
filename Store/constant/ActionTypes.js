@@ -11,3 +11,7 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const ADD_APPOINTMENTS = 'ADD_APPOINTMENTS';
 
 export const GET_ALL_RECIPIENT = 'GET_ALL_RECIPIENT';
+
+export const FETCH_ALL_CHATS = 'FETCH_ALL_CHATS';
+export const CLEAR_CHAT = 'CLEAR_CHAT';
+

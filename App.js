@@ -17,6 +17,8 @@ import Signup from './components/signup';
 import Contact from './components/contact';
 import About from './components/about';
 import Signin from './components/signin';
+import ChatBox from './components/chatBox';
+
 import store from './Store/index';
 import StylingPage from './components/stylingpage';
 import * as firebase from 'firebase';
@@ -182,6 +184,7 @@ function AppContainer() {
         (authenticatedUser) ?
           < Navigator >
             <Screen name='Inbox' component={Inbox} />
+            <Screen name='ChatBox' component={ChatBox} />
           </Navigator>
           :
           < Navigator >

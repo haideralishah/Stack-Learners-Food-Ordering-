@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllRecepient } from '../Store/action/chat'
 const Inbox = ({ navigation }) => {
@@ -20,13 +21,16 @@ const Inbox = ({ navigation }) => {
             {
                 (recipients && recipients.length > 0) ? (
                     recipients.map((recipient) => (
-                        <View key={recipient.id} style={{borderWidth: 3,}}>
-                            <Text
-                                style={{
-                                    color: 'green',
-                                    fontSize: 20
-                                }}
-                            >{recipient.email}</Text>
+                        <View key={recipient.id} style={{ borderWidth: 1, }}>
+                            <Button onPress={() => {
+                                navigation.navigate('ChatBox', { chatRecipient: recipient })
+                            }}
+                                title={recipient.email}
+                                color="green"
+                            />
+
+
+
                         </View>
                     ))
 
