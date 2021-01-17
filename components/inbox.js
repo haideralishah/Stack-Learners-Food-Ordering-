@@ -28,17 +28,10 @@ const Inbox = ({ navigation }) => {
                                 title={recipient.email}
                                 color="green"
                             />
-
-
-
                         </View>
                     ))
-
-
                 ) : null
             }
-
-
         </View>
     )
 }

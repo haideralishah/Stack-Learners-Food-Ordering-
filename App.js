@@ -14,10 +14,16 @@ import Inbox from './components/inbox';
 
 import Camera from './components/camera';
 import Signup from './components/signup';
+import Foodmenus from './components/foodmenus';
+import AddNewDish from './components/addNewDish';
+import FoodListing from './components/foodListing';
+import Checkout from './components/checkout';
+
 import Contact from './components/contact';
 import About from './components/about';
 import Signin from './components/signin';
 import ChatBox from './components/chatBox';
+import DeliveryDetails from './components/deliveryDetails';
 
 import store from './Store/index';
 import StylingPage from './components/stylingpage';
@@ -164,7 +170,7 @@ const { Navigator, Screen } = Stack;
 
 
 
-function AppContainer() {
+function Routes() {
   const authenticatedUser = useSelector(({ auth }) => auth.user);
 
   useEffect(() => {
@@ -183,11 +189,17 @@ function AppContainer() {
       {
         (authenticatedUser) ?
           < Navigator >
-            <Screen name='Inbox' component={Inbox} />
-            <Screen name='ChatBox' component={ChatBox} />
+            <Screen name='Foodmenus' component={Foodmenus} />
+            <Screen name='AddNewDish' component={AddNewDish} />
+
           </Navigator>
           :
           < Navigator >
+            <Screen name='FoodListing' component={FoodListing} />
+            <Screen name='Checkout' component={Checkout} />
+            <Screen name='DeliveryDetails' component={DeliveryDetails} />
+
+
             <Screen name='Signup' component={Signup} />
             <Screen name='Signin' component={Signin} />
           </Navigator>
@@ -202,7 +214,7 @@ function AppContainer() {
 export default function App() {
   return (
     <Provider store={store}>
-      <AppContainer />
+      <Routes />
     </Provider>
   );
 }

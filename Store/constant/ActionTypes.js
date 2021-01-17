@@ -15,3 +15,7 @@ export const GET_ALL_RECIPIENT = 'GET_ALL_RECIPIENT';
 export const FETCH_ALL_CHATS = 'FETCH_ALL_CHATS';
 export const CLEAR_CHAT = 'CLEAR_CHAT';
 
+export const NEW_DISH = 'NEW_DISH';
+
+
+export const ADD_TO_CART = 'ADD_TO_CART';

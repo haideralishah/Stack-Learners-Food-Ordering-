@@ -17,9 +17,6 @@ const Chatbox = ({ navigation, route }) => {
 
     useEffect(() => () => dispatch(detachMsgListener()), []);
 
-    useEffect(() => {
-        console.log(chats, 'chatschatschats')
-    })
     const sendMsgNow = () => {
         let newMsg = {
             sender: authenticatedUser.uid,
@@ -47,7 +44,7 @@ const Chatbox = ({ navigation, route }) => {
                 chats.map((eachMsg, index) => {
                     return (
                         <View>
-                            <Text style={{color: eachMsg.sender === authenticatedUser.uid? 'green': 'red'}}>
+                            <Text style={{ color: eachMsg.sender === authenticatedUser.uid ? 'green' : 'red' }}>
                                 {eachMsg.message}
                             </Text>
                         </View>)
